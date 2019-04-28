@@ -1,0 +1,5 @@
+EnemyPrefabName,EnemyPrefabPath,EnemyPosX,EnemyPosY,EnemyPosZ,EnemyRotationX,EnemyRotationY,EnemyRotationZ,EnemyRotationW
+enemy,Assets/Resources/Prefab/enemy.prefab,-9.62,2.19,6.64,0,0,0,1
+enemy,Assets/Resources/Prefab/enemy.prefab,0,2.19,14.59,0,0,0,1
+enemy,Assets/Resources/Prefab/enemy.prefab,0,2.19,4.31,0,0,0,1
+enemy,Assets/Resources/Prefab/enemy.prefab,5.87,2.19,6.64,0,0,0,1
