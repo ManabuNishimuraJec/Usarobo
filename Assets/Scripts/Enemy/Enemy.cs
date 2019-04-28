@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
 
     private CharacterController enemyController;
     private EnemyMaster eMaster = new EnemyMaster();
+    private EnemyState state;       // 敵ステータス
+    private Transform playerTransform;
 
     public enum EnemyState
 	{
@@ -42,7 +44,7 @@ public class Enemy : MonoBehaviour
 		Chase
 	};
 
-	private EnemyState state;       // 敵ステータス
+	
 
 	void Start()
     {
@@ -54,57 +56,83 @@ public class Enemy : MonoBehaviour
 		destination = setPosition.GetDestination();
 		velocity = Vector3.zero;
 		elapsedTime = 0f;
-		state = EnemyState.Wait;
+        SetState("wait");
 	}
 
     void Update()
     {
         eMaster.Destinaion = destination;
 
-        if (!arrived)
-		{
-			// 着地チェック
-			if (enemyController.isGrounded)
-			{
-				// 移動方向
-				direction = (destination - transform.position).normalized;
+        if (state == EnemyState.Walk || state == EnemyState.Chase)
+        {
+            if(state == EnemyState.Chase)
+            {
+                setPosition.SetDestination(playerTransform.position);
+                destination = setPosition.GetDestination();
+            }
+            // 着地チェック
+            if (enemyController.isGrounded)
+            {
+                // 移動方向
+                direction = (destination - transform.position).normalized;
 
-				transform.LookAt(new Vector3(destination.x, transform.position.y, destination.z));
-				velocity = direction * walkSpeed;
-				
-			}
-			velocity.y += Physics.gravity.y * Time.deltaTime;
-			enemyController.Move(velocity * Time.deltaTime);
+                transform.LookAt(new Vector3(destination.x, transform.position.y, destination.z));
+                velocity = direction * walkSpeed;
 
-            
+            }
             var nowPosition = new Vector3(transform.position.x, 0, transform.position.z);
             var newDestination = new Vector3(destination.x, 0, destination.z);
+
+            // 目的地チェック
             if (Vector3.Distance(nowPosition, newDestination) < 0.5f)
-			{
-				arrived = true;
-			}
-		}
-		else
-		{
-			elapsedTime += Time.deltaTime;
+            {
+                SetState("wait");
+                arrived = true;
+            }
+        }
+        else if (state == EnemyState.Wait)
+        {
+            elapsedTime += Time.deltaTime;
 
-			// 待ち時間を超えたら次の目的地を設定
-			if(elapsedTime > waitTime)
-			{
-				setPosition.CreateRandomPosition();
-				destination = setPosition.GetDestination();
-				arrived = false;
-				elapsedTime = 0f;
-
-			}
-		}
+            // 待ち時間を超えたら次の目的地を設定
+            if (elapsedTime > waitTime)
+            {
+                SetState("walk");
+            }
+        }
+		velocity.y += Physics.gravity.y * Time.deltaTime;
+		enemyController.Move(velocity * Time.deltaTime);
     }
 
 	public void SetState(string mode, Transform obj = null)
 	{
 		if (mode == "walk")
 		{
+            arrived = false;
+            state = EnemyState.Walk;
+            elapsedTime = 0f;
+            setPosition.CreateRandomPosition();
+            destination = setPosition.GetDestination();
+        }
+        else if(mode == "chase")
+        {
+            state = EnemyState.Chase;
 
-		}
+            // 待機状態からでも追跡可能とする
+            arrived = false;
+            playerTransform = obj;
+        }
+        else if(mode == "wait")
+        {
+            elapsedTime = 0f;
+            state = EnemyState.Wait;
+            arrived = true;
+            velocity = Vector3.zero;
+        }
 	}
+
+    public EnemyState GetState()
+    {
+        return state;
+    }
 }
