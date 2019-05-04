@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UniRx;
+using System;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -20,13 +22,19 @@ public class PlayerControl : MonoBehaviour
 	// 発射間隔
 	public float maxtime;
 	private float time;
-
-	// 発射オブジェクト
-	public GameObject buleet;
+    
 	public Transform center;
 
     Rigidbody MoveX;
     Vector3 Move;
+
+    private Subject<Unit> shotSubject = new Subject<Unit>();
+
+    public IObservable<Unit> OnShotCanonmessage
+    {
+        get { return shotSubject; }
+    }
+
     void Start()
     {
         //  RigidbodyをGetComponemt
@@ -34,6 +42,9 @@ public class PlayerControl : MonoBehaviour
     }
     void Update()
     {
+
+        int iNum = 10;
+        int iNum2 = iNum;
 		// マウスカーソルの座標を取得
 		var pos = Vector3.forward * Vector3.Distance(transform.position, center.position);
 		Vector3 dir = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition + pos));
@@ -44,9 +55,7 @@ public class PlayerControl : MonoBehaviour
 		Ray ray = new Ray(transform.position, dir);
         // レイの向きをプレイヤーの向きと対応させる
 		transform.rotation = Quaternion.LookRotation(ray.direction);
-
-		time += Time.deltaTime;
-
+        
         //  未入力時
         InputX = 0;
         InputY = 0;
@@ -106,20 +115,19 @@ public class PlayerControl : MonoBehaviour
 
         //  移動
         MoveX.velocity = new Vector3(speedX * InputX, speedY * InputY,0);
-        
-		// 発射
-		if (time > maxtime)
-		{
-			// マウス左クリック
-			if (Input.GetMouseButton(0))
-			{
-				// バレット生成
-				Instantiate(buleet, transform.position + new Vector3(1.0f, 0.5f, 0.8f), Quaternion.identity);
-                Instantiate(buleet, transform.position + new Vector3(-1.0f, 0.5f, 0.8f), Quaternion.identity);
-            }
-			time = 0.0f;
-		}
 
+        time += Time.deltaTime;
+        // 発射
+        if (time > maxtime)
+        {
+            // マウス左クリック
+            if (Input.GetMouseButton(0))
+            {
+                shotSubject.OnNext(Unit.Default);
+            }
+
+            time = 0.0f;
+        }
     }
     
     private void OnTriggerEnter(Collider other)
