@@ -47,4 +47,13 @@ public class buleet : MonoBehaviour
 		
 		}
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // バレットに当たったら耐久値を減らす
+        if (collision.gameObject.tag == "wall")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
