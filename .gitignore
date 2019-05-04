@@ -7,6 +7,16 @@
 /[Bb]uilds/
 /[Ll]ogs/
 
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+/Library/
+
+/Library/shadercompiler-UnityShaderCompiler.exe0.log
+
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
 
