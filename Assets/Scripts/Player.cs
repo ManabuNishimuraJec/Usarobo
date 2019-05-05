@@ -3,11 +3,7 @@
 public class Player : MonoBehaviour
 {
     [SerializeField]
-<<<<<<< HEAD
-	private float moveSpeed = 5.0f;
-=======
     private float moveSpeed = 5.0f;
->>>>>>> master
     [SerializeField]
     private float jumpPower = 0.0f;
     [SerializeField]
@@ -22,13 +18,10 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-<<<<<<< HEAD
-		PlayerControl = GetComponent<CharacterController>();
-	}
-=======
+
         PlayerControl = GetComponent<CharacterController>();
     }
->>>>>>> master
+
 
     void Update()
     {
@@ -43,11 +36,7 @@ public class Player : MonoBehaviour
             velocity = Vector3.zero;
 
             // カメラの方向を加味して移動
-<<<<<<< HEAD
-            velocity = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal ;
-=======
             velocity = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
->>>>>>> master
             velocity *= moveSpeed;
 
             if (Input.GetKeyDown(KeyCode.V))
@@ -61,9 +50,5 @@ public class Player : MonoBehaviour
         velocity.y += Physics.gravity.y * Time.deltaTime;
 
         PlayerControl.Move(velocity * Time.deltaTime);
-<<<<<<< HEAD
-    } 
-=======
     }
->>>>>>> master
 }
