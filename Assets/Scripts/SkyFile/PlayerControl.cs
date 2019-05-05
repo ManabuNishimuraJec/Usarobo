@@ -23,8 +23,6 @@ public class PlayerControl : MonoBehaviour
 	public float maxtime;
 	private float time;
     
-	public Transform center;
-
     Rigidbody MoveX;
     Vector3 Move;
 
@@ -46,7 +44,7 @@ public class PlayerControl : MonoBehaviour
         int iNum = 10;
         int iNum2 = iNum;
 		// マウスカーソルの座標を取得
-		var pos = Vector3.forward * Vector3.Distance(transform.position, center.position);
+		/* var pos = Vector3.forward * Vector3.Distance(transform.position, center.position);
 		Vector3 dir = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition + pos));
 		
 		Debug.Log(dir);
@@ -55,7 +53,7 @@ public class PlayerControl : MonoBehaviour
 		Ray ray = new Ray(transform.position, dir);
         // レイの向きをプレイヤーの向きと対応させる
 		transform.rotation = Quaternion.LookRotation(ray.direction);
-        
+        */
         //  未入力時
         InputX = 0;
         InputY = 0;

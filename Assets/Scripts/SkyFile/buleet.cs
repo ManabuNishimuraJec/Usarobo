@@ -17,17 +17,19 @@ public class buleet : MonoBehaviour
     // 削除する座標を格納する変数
     public float eposZ;
 
-    public GameObject player;
+    public GameObject ShotUnit;
+
+    private ShotUnitMaster shotMaster = new ShotUnitMaster();
 
     void Start()
     {
 		// Rigidbodyをgetconponent
 		rid = GetComponent<Rigidbody>();
         // Playerの情報を格納
-		player = GameObject.Find("Player");
+		//ShotUnit = GameObject.Find("ShotUnit");
 
         // 自身の向きにPlayerの向きを格納
-		transform.rotation = player.transform.rotation ;
+		transform.rotation = shotMaster.Rotation;
     }
 
     // 動かす
