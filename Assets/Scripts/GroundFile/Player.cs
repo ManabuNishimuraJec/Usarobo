@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UniRx;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +18,13 @@ public class Player : MonoBehaviour
     private float inputVertical;
     private Vector3 velocity;
 
+    private Subject<Unit> shotSubject = new Subject<Unit>();
+
+    public IObservable<Unit> OnShotCanonMessage
+    {
+        get { return shotSubject; }
+    }
+
     void Start()
     {
 
@@ -25,6 +34,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        ShotAtk();
+
         // 地面に立っている状態
         if (PlayerControl.isGrounded)
         {
@@ -50,5 +61,14 @@ public class Player : MonoBehaviour
         velocity.y += Physics.gravity.y * Time.deltaTime;
 
         PlayerControl.Move(velocity * Time.deltaTime);
+    }
+
+    void ShotAtk()
+    {
+        // マウス左クリック
+        if (Input.GetMouseButton(0))
+        {
+            shotSubject.OnNext(Unit.Default);
+        }
     }
 }
