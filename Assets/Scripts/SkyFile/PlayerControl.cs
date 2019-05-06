@@ -7,6 +7,22 @@ using System;
 
 public class PlayerControl : MonoBehaviour
 {
+    private PlayerMaster pMaster = new PlayerMaster();
+
+    [SerializeField]
+    private float moveSpeed = 5.0f;
+    [SerializeField]
+    private float jumpPower = 0.0f;
+    [SerializeField]
+    private GameObject Bullet;
+    [SerializeField]
+    private Transform center;
+
+    private CharacterController playerControl;
+    private float inputHorizontal;
+    private float inputVertical;
+    private Vector3 velocity;
+
     //  移動速度
     public float speedX = 0.0f;
     public float speedY = 0.0f;
@@ -37,29 +53,100 @@ public class PlayerControl : MonoBehaviour
     {
         //  RigidbodyをGetComponemt
         MoveX = GetComponent<Rigidbody>();
+        playerControl = GetComponent<CharacterController>();
     }
     void Update()
     {
+        if (pMaster.CheckMode)
+        {
+            ShootingControl();
+        }
 
+        else
+        {
+            ActionControl();
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        // 障害物に当たったらHPを減少
+        if(other.gameObject.tag == "wall")
+        {
+            HP-=1;
+        }
+
+        if(other.gameObject.tag == "End")
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Clear");
+        }
+    }
+
+    void ActionControl()
+    {
+        ShotAtk();
+
+        // 地面に立っている状態
+        if (playerControl.isGrounded)
+        {
+            inputHorizontal = Input.GetAxis("Horizontal");
+            inputVertical = Input.GetAxis("Vertical");
+
+            // カメラの方向から、x-z平面の単位ベクトルを取得
+            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+            velocity = Vector3.zero;
+
+            // カメラの方向を加味して移動
+            velocity = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
+            velocity *= moveSpeed;
+
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                // ジャンプ
+                velocity.y += jumpPower;
+            }
+        }
+
+        // 重力を設定
+        velocity.y += Physics.gravity.y * Time.deltaTime;
+
+        playerControl.Move(velocity * Time.deltaTime);
+
+        // 発射
+        if (time > maxtime)
+        {
+            // マウス左クリック
+            if (Input.GetMouseButton(0))
+            {
+                shotSubject.OnNext(Unit.Default);
+            }
+
+            time = 0.0f;
+        }
+    }
+
+    void ShootingControl()
+    {
+        //Debug.Log("R");
         int iNum = 10;
         int iNum2 = iNum;
-		// マウスカーソルの座標を取得
-		/* var pos = Vector3.forward * Vector3.Distance(transform.position, center.position);
-		Vector3 dir = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition + pos));
-		
-		Debug.Log(dir);
-        
-		// レイを飛ばす(発射点の座標、発射する向き)
-		Ray ray = new Ray(transform.position, dir);
+        // マウスカーソルの座標を取得
+        /* var pos = Vector3.forward * Vector3.Distance(transform.position, center.position);
+        Vector3 dir = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition + pos));
+
+        Debug.Log(dir);
+
+        // レイを飛ばす(発射点の座標、発射する向き)
+        Ray ray = new Ray(transform.position, dir);
         // レイの向きをプレイヤーの向きと対応させる
-		transform.rotation = Quaternion.LookRotation(ray.direction);
+        transform.rotation = Quaternion.LookRotation(ray.direction);
         */
         //  未入力時
         InputX = 0;
         InputY = 0;
 
         // HPが0になったら自身を削除
-        if(HP <= 0)
+        if (HP <= 0)
         {
             Destroy(this.gameObject);
             UnityEngine.SceneManagement.SceneManager.LoadScene("title");
@@ -69,7 +156,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             //Debug.Log("A");
-            InputX = -1 ;
+            InputX = -1;
         }
 
         //  Wが入力された場合
@@ -89,7 +176,7 @@ public class PlayerControl : MonoBehaviour
         {
             InputY = -1;
         }
-		// ↓画面端で停止する
+        // ↓画面端で停止する
         if (transform.position.x > 5 && InputX == 1)
         {
             InputX = 0;
@@ -109,10 +196,10 @@ public class PlayerControl : MonoBehaviour
         {
             InputY = 0;
         }
-		// ↑画面端で停止する
+        // ↑画面端で停止する
 
         //  移動
-        MoveX.velocity = new Vector3(speedX * InputX, speedY * InputY,0);
+        MoveX.velocity = new Vector3(speedX * InputX, speedY * InputY, 0);
 
         time += Time.deltaTime;
         // 発射
@@ -126,19 +213,20 @@ public class PlayerControl : MonoBehaviour
 
             time = 0.0f;
         }
-    }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        // 障害物に当たったらHPを減少
-        if(other.gameObject.tag == "wall")
-        {
-            HP-=1;
-        }
 
-        if(other.gameObject.tag == "End")
+        //if(!playerControl.isGrounded)
+        //{
+        //    MoveX.velocity = new Vector3(speedX * InputX, 0, 0);
+        //    Debug.Log("A");
+        //}
+    }
+
+    void  ShotAtk()
+    {
+        // マウス左クリック
+        if (Input.GetMouseButton(0))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Clear");
+            shotSubject.OnNext(Unit.Default);
         }
     }
 }
