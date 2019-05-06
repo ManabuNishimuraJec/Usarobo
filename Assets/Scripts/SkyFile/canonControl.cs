@@ -15,10 +15,16 @@ public class canonControl : MonoBehaviour
 
     private ShotUnitMaster shotMaster = new ShotUnitMaster();
 
+    private Animator _anim;
+
     void Start()
     {
+        _anim = GetComponent<Animator>();
+
         pc.OnShotCanonmessage.Subscribe(_ =>
-        { // バレット生成
+        {
+            _anim.Play("knockback",0,0.0f);   // Animation再生
+            // バレット生成
             Instantiate(Bullet, transform.position + new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
         });
     }

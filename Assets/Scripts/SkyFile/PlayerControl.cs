@@ -40,20 +40,6 @@ public class PlayerControl : MonoBehaviour
     }
     void Update()
     {
-
-        int iNum = 10;
-        int iNum2 = iNum;
-		// マウスカーソルの座標を取得
-		/* var pos = Vector3.forward * Vector3.Distance(transform.position, center.position);
-		Vector3 dir = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition + pos));
-		
-		Debug.Log(dir);
-        
-		// レイを飛ばす(発射点の座標、発射する向き)
-		Ray ray = new Ray(transform.position, dir);
-        // レイの向きをプレイヤーの向きと対応させる
-		transform.rotation = Quaternion.LookRotation(ray.direction);
-        */
         //  未入力時
         InputX = 0;
         InputY = 0;
