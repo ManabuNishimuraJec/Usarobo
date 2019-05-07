@@ -31,7 +31,7 @@ public class wallFormer : MonoBehaviour
             time = 0.0f;
 
             // 生成時間変更
-            timeMax =　timeMax = Random.Range(0.3f, 0.5f);
+            timeMax =　timeMax = Random.Range(0.5f, 1.5f);
         }
     }
 }
