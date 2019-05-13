@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4465248163055414787}
   - component: {fileID: 3698957097450518265}
   - component: {fileID: 6411227610492894881}
-  - component: {fileID: 3528953139920204214}
   - component: {fileID: 8004728985928271407}
   m_Layer: 0
   m_Name: ShotUnit
@@ -93,21 +92,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3528953139920204214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4197330567441616632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b34f4460dd02f41915ec81de44bc26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pc: {fileID: 0}
-  Bullet: {fileID: 8226198818624895118, guid: 3297b4bcc90768d4881d8fff3aa534b2, type: 3}
-  center: {fileID: 0}
 --- !u!95 &8004728985928271407
 Animator:
   serializedVersion: 3

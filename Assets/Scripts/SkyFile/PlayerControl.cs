@@ -44,7 +44,7 @@ public class PlayerControl : MonoBehaviour
 
     private Subject<Unit> shotSubject = new Subject<Unit>();
 
-    public IObservable<Unit> OnShotCanonmessage
+    public IObservable<Unit> OnShotCanonMessage
     {
         get { return shotSubject; }
     }
@@ -208,6 +208,7 @@ public class PlayerControl : MonoBehaviour
             // マウス左クリック
             if (Input.GetMouseButton(0))
             {
+				// 発射する信号を撃つ
                 shotSubject.OnNext(Unit.Default);
             }
 

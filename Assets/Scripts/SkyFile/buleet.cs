@@ -9,7 +9,7 @@ public class buleet : MonoBehaviour
 	Rigidbody rid;
 
     // time管理変数
-	private float time = 0.0f;
+	private float time;
 	public float maxtime;
 
     // 自身の座標を取得するための変数
@@ -17,19 +17,10 @@ public class buleet : MonoBehaviour
     // 削除する座標を格納する変数
     public float eposZ;
 
-    public GameObject ShotUnit;
-
-    private ShotUnitMaster shotMaster = new ShotUnitMaster();
-
     void Start()
     {
 		// Rigidbodyをgetconponent
 		rid = GetComponent<Rigidbody>();
-        // Playerの情報を格納
-		//ShotUnit = GameObject.Find("ShotUnit");
-
-        // 自身の向きにPlayerの向きを格納
-		transform.rotation = shotMaster.Rotation;
     }
 
     // 動かす
@@ -41,7 +32,7 @@ public class buleet : MonoBehaviour
 		time += Time.deltaTime;
         
         // スピードを加算
-		rid.AddForce(transform.forward.normalized * speed * -1,ForceMode.Impulse);
+		rid.AddForce(transform.forward * speed,ForceMode.Impulse);
         
         if (myposZ > eposZ || time > maxtime)
 		{
