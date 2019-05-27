@@ -29,24 +29,24 @@ public class PlayerControl : MonoBehaviour
 	//	入力用
 	//--------------------------------------------------------
 	[SerializeField]
-    private float atkPower = 0.0f;			//	攻撃力(Bullet)
-    [SerializeField]
-    private float jumpPower = 0.0f;		//	ジャンプ力
+	private float atkPower = 0.0f;          //	攻撃力(Bullet)
 	[SerializeField]
-	private Vector3 moveXYZ;				//	移動速度
+	private float jumpPower = 0.0f;     //	ジャンプ力
+	[SerializeField]
+	private Vector3 moveXYZ;                //	移動速度
 	[SerializeField]
 	private int hp;                                 //	HP
 	[SerializeField]
 	private int maxHp;                                 //	HP
-//--------------------------------------------------------
+													   //--------------------------------------------------------
 
 	private float inputHorizontal;
-    private float inputVertical;
+	private float inputVertical;
 
 
-    //  入力判定
-    private float InputX = 0.0f;
-    private float InputY = 0.0f;
+	//  入力判定
+	private float InputX = 0.0f;
+	private float InputY = 0.0f;
 
 	// 発射間隔
 	public float maxtime;
@@ -60,10 +60,10 @@ public class PlayerControl : MonoBehaviour
 
 	private Subject<Unit> shotSubject = new Subject<Unit>();
 
-    public IObservable<Unit> OnShotCanonmessage
-    {
-        get { return shotSubject; }
-    }
+	public IObservable<Unit> OnShotCanonMessage
+	{
+		get { return shotSubject; }
+	}
 
 	void Awake()
 	{
@@ -81,36 +81,36 @@ public class PlayerControl : MonoBehaviour
 		prevPos = transform.position;
 	}
 	void Start()
-    {
-        //  RigidbodyをGetComponemt
-        MoveX = GetComponent<Rigidbody>();
+	{
+		//  RigidbodyをGetComponemt
+		MoveX = GetComponent<Rigidbody>();
 		//	CharacterControllerをGetCompornent
 		playerControl = GetComponent<CharacterController>();
 
 	}
-    void Update()
-    {
+	void Update()
+	{
 		//	時間カウント用
 		timer += Time.deltaTime;
 
 		//	Stageで呼び出す情報を判断
 		if (pMaster.CheckMode)
-        {
-            ShootingControl();
-        }
+		{
+			ShootingControl();
+		}
 
-        else
-        {
-            ActionControl();
-        }
+		else
+		{
+			ActionControl();
+		}
 
 		//	差分を格納
-		Vector3 diffPos = transform.position - prevPos;		//	角度を求める
+		Vector3 diffPos = transform.position - prevPos;     //	角度を求める
 
 		//	移動方向に向かせる
-		if(diffPos!=Vector3.zero)
+		if (diffPos != Vector3.zero)
 		{
-			if(playerControl.isGrounded)
+			if (playerControl.isGrounded)
 			{
 				transform.rotation = Quaternion.LookRotation(diffPos);
 			}
@@ -122,28 +122,28 @@ public class PlayerControl : MonoBehaviour
 		//	Playerの現在位置を保存
 		prevPos = transform.position;
 	}
-    
+
 	private void OnTriggerEnter(Collider other)
-    {
-        // 障害物に当たったらHPを減少
-        if(other.gameObject.tag == "wall")
+	{
+		// 障害物に当たったらHPを減少
+		if (other.gameObject.tag == "wall")
 		{
-			hp -= 1;	//	HP減少
-        }
+			hp -= 1;    //	HP減少
+		}
 
-        if(other.gameObject.tag == "End")
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Clear");
-        }
-    }
+		if (other.gameObject.tag == "End")
+		{
+			UnityEngine.SceneManagement.SceneManager.LoadScene("Clear");
+		}
+	}
 
-    void ActionControl()
-    {
-        ShotAtk();
+	void ActionControl()
+	{
+		ShotAtk();
 
-        // 地面に立っている状態
-        if (playerControl.isGrounded)
-        {
+		// 地面に立っている状態
+		if (playerControl.isGrounded)
+		{
 			inputHorizontal = 0;
 			inputVertical = 0;
 
@@ -226,125 +226,125 @@ public class PlayerControl : MonoBehaviour
 
 			// カメラの方向から、x-z平面の単位ベクトルを取得
 			Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-            velocity = Vector3.zero;
+			velocity = Vector3.zero;
 
-            // カメラの方向を加味して移動
-            velocity = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
+			// カメラの方向を加味して移動
+			velocity = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
 			velocity *= pMaster.MoveSpeed.x;
 
 			if (Input.GetKeyDown(KeyCode.V))
-            {
+			{
 				// ジャンプ
 				velocity.y += pMaster.JumpPower;
-            }
-        }
+			}
+		}
 
-        // 重力を設定
-        velocity.y += Physics.gravity.y * Time.deltaTime;
+		// 重力を設定
+		velocity.y += Physics.gravity.y * Time.deltaTime;
 
 		//	移動させる
-        playerControl.Move(velocity * Time.deltaTime);
+		playerControl.Move(velocity * Time.deltaTime);
 
 		// 発射
 		if (time > maxtime)
-        {
-            // マウス左クリック
-            if (Input.GetMouseButton(0))
-            {
-                shotSubject.OnNext(Unit.Default);
-            }
+		{
+			// マウス左クリック
+			if (Input.GetMouseButton(0))
+			{
+				shotSubject.OnNext(Unit.Default);
+			}
 
-            time = 0.0f;
-        }
+			time = 0.0f;
+		}
 
 	}
 
-    void ShootingControl()
-    {
-        //Debug.Log("R");
-        int iNum = 10;
-        int iNum2 = iNum;
+	void ShootingControl()
+	{
+		//Debug.Log("R");
+		int iNum = 10;
+		int iNum2 = iNum;
 
-        //  未入力時
-        InputX = 0;
-        InputY = 0;
+		//  未入力時
+		InputX = 0;
+		InputY = 0;
 
-        // HPが0になったら自身を削除
-        if (pMaster.Hp <= 0)
-        {
-            Destroy(this.gameObject);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("title");
-        }
+		// HPが0になったら自身を削除
+		if (pMaster.Hp <= 0)
+		{
+			Destroy(this.gameObject);
+			UnityEngine.SceneManagement.SceneManager.LoadScene("title");
+		}
 
-        //  Aが入力された場合
-        if (Input.GetKey(KeyCode.A))
-        {
-            //Debug.Log("A");
-            InputX = -1;
-        }
+		//  Aが入力された場合
+		if (Input.GetKey(KeyCode.A))
+		{
+			//Debug.Log("A");
+			InputX = -1;
+		}
 
-        //  Wが入力された場合
-        if (Input.GetKey(KeyCode.W))
-        {
-            InputY = 1;
-        }
+		//  Wが入力された場合
+		if (Input.GetKey(KeyCode.W))
+		{
+			InputY = 1;
+		}
 
-        //  Dが入力された場合された場合
-        if (Input.GetKey(KeyCode.D))
-        {
-            InputX = 1;
-        }
+		//  Dが入力された場合された場合
+		if (Input.GetKey(KeyCode.D))
+		{
+			InputX = 1;
+		}
 
-        //  Sが入力された場合
-        if (Input.GetKey(KeyCode.S))
-        {
-            InputY = -1;
-        }
-        // ↓画面端で停止する
-        if (transform.position.x > 5 && InputX == 1)
-        {
-            InputX = 0;
-        }
+		//  Sが入力された場合
+		if (Input.GetKey(KeyCode.S))
+		{
+			InputY = -1;
+		}
+		// ↓画面端で停止する
+		if (transform.position.x > 5 && InputX == 1)
+		{
+			InputX = 0;
+		}
 
-        if (transform.position.x < -5 && InputX == -1)
-        {
-            InputX = 0;
-        }
+		if (transform.position.x < -5 && InputX == -1)
+		{
+			InputX = 0;
+		}
 
-        if (transform.position.y > 3.6 && InputY == 1)
-        {
-            InputY = 0;
-        }
+		if (transform.position.y > 3.6 && InputY == 1)
+		{
+			InputY = 0;
+		}
 
-        if (transform.position.y < -1.6 && InputY == -1)
-        {
-            InputY = 0;
-        }
-        // ↑画面端で停止する
+		if (transform.position.y < -1.6 && InputY == -1)
+		{
+			InputY = 0;
+		}
+		// ↑画面端で停止する
 
-        //  移動
-        MoveX.velocity = new Vector3(pMaster.MoveSpeed.x * InputX, pMaster.MoveSpeed.y * InputY, 0);
+		//  移動
+		MoveX.velocity = new Vector3(pMaster.MoveSpeed.x * InputX, pMaster.MoveSpeed.y * InputY, 0);
 
-        time += Time.deltaTime;
-        // 発射
-        if (time > maxtime)
-        {
-            // マウス左クリック
-            if (Input.GetMouseButton(0))
-            {
-                shotSubject.OnNext(Unit.Default);
-            }
+		time += Time.deltaTime;
+		// 発射
+		if (time > maxtime)
+		{
+			// マウス左クリック
+			if (Input.GetMouseButton(0))
+			{
+				shotSubject.OnNext(Unit.Default);
+			}
 
-            time = 0.0f;
-        }
-    }
+			time = 0.0f;
+		}
+	}
 
-    void  ShotAtk()
-    {
-        // マウス左クリック
-        if (Input.GetMouseButton(0))
-        {
-            shotSubject.OnNext(Unit.Default);
-        }
-    }
+	void ShotAtk()
+	{
+		// マウス左クリック
+		if (Input.GetMouseButton(0))
+		{
+			shotSubject.OnNext(Unit.Default);
+		}
+	}
 }

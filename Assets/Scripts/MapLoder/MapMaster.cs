@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MapMaster : MonoBehaviour
 {
-    private static string mapStyle;
-
-    public string MapStyle { get => mapStyle; set => mapStyle = value; }
+	private static string mapStyle;
+	private static Vector3 endLine;
+	public string MapStyle { get => mapStyle; set => mapStyle = value; }
+	public Vector3 EndLine { get => endLine; set => endLine = value; }
 }
