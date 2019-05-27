@@ -3,31 +3,27 @@
 public class SkyEnemy : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    private float speed;					//前に進む速さ
     [SerializeField]
-    private SkyEnemyDirection direction;
+    private SkyEnemyDirection direction;	//左右の動き
 	[SerializeField]
-	private GameObject bullet;
+	private GameObject bullet;				//エネミーバレット
 	[SerializeField]
-	private GameObject item;
-
-    [SerializeField]
-    private float movemaxtime;
-    private float movetime;
-	[SerializeField]
-	private float shotmaxtime;
-	private float shottime;
+	private GameObject item;				//落とすアイテム
 
 	[SerializeField]
-	private int maxHP;
-	private int HP;
+	private float shotmaxtime;				//弾を撃つ間隔
+	private float shottime;					//クールタイム用
+
+	[SerializeField]
+	private int maxHP;						//エネミー最大HP
+	private int HP;                         //エネミー現在HP
 
 	private Rigidbody rigidbody;
 
-
+	//初期化
 	void Start()
     {
-		movetime = 0.0f;
 		shottime = 0.0f;
 		HP = maxHP;
 		rigidbody = GetComponent<Rigidbody>();
@@ -35,25 +31,24 @@ public class SkyEnemy : MonoBehaviour
 
     void Update()
     {
-        movetime += Time.deltaTime;
 		shottime += Time.deltaTime;
-		//if (movetime > movemaxtime)
-		//{
-		//    transform.position = new Vector3(transform.position.x+direction.chengx, transform.position.y+direction.chengy, transform.position.z + speed);
-		//    movetime = 0.0f;
-		//}
-		rigidbody.velocity = new Vector3(speed * direction.chengx, speed * direction.chengy, speed*-1.0f);
+		//エネミーの動き
+		rigidbody.velocity = new Vector3(speed * direction.chengx, speed * direction.chengy, speed*-0.2f);
+		//弾発射条件
 		if (shottime > shotmaxtime)
 		{
+			//弾生成
 			Instantiate(bullet, transform.position + new Vector3 ( 0.0f, 0.0f, -1.0f ), Quaternion.identity);
 			shottime = 0.0f;
 		}
-
+		//死亡判定
 		if (HP <= 0)
 		{
+			//アイテム生成
 			Instantiate(item, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 		}
+		//範囲外ならデストローーーーーーイ
 		if (transform.position.z <= -5.0f)
 		{
 			Destroy(gameObject);
@@ -62,6 +57,7 @@ public class SkyEnemy : MonoBehaviour
 
 	private void OnTriggerEnter(Collider col)
 	{
+		//プレイヤーバレットに当たったらダメージを受ける
 		if (col.gameObject.tag == "bullet")
 		{
 			--HP;

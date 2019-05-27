@@ -28,6 +28,12 @@ public class canonControl : MonoBehaviour
 	
 	private Animator _anim;         // アニメータ
 
+	private CanonData canonData = new CanonData();
+
+	private bool rayFlag = false;
+
+	private string rayTag;
+
 	public IObservable<Vector3> OnWallPosMessage		// メッセージを送る処理をする関数
 	{
 		get { return wallPosSubject; }
@@ -68,8 +74,9 @@ public class canonControl : MonoBehaviour
 		// レイがちゃんと当たっているか確認
 		if (Physics.BoxCast(transform.position,Vector3.one * 0.5f,dir,out hit))
 		{
-			if(hit.collider.tag == "wall"||hit.collider.tag == "Enemy" || hit.collider.tag == "enemybullet")
+			if(hit.collider.tag == "wall"||hit.collider.tag == "Enemy")
 			{
+				rayFlag = true;
 				// wallの座標を取得
 				wallPos = hit.collider.GetComponent<Transform>().position;
 				// メッセージをCorsorControlに送る
@@ -77,16 +84,27 @@ public class canonControl : MonoBehaviour
 				// 狙っているオブジェクトの情報を渡す
 				taget = hit.collider.gameObject;
 			}
-			else
+			else if(hit.collider.tag!="bullet")
 			{
+				rayFlag = false;
 				taget = null;
 			}
+			rayTag = hit.collider.tag;
+		}
+		else
+		{
+			rayFlag = false;
+			rayTag = null;
+			taget = null;
 		}
         MasterWrite();
+		canonData.RayHitFlag = rayFlag;
+		canonData.RaycollitionTag = rayTag;
     }
 
     void MasterWrite()
     {
         shotMaster.Rotation = transform.rotation;
+		Debug.Log("C");
     }
 }

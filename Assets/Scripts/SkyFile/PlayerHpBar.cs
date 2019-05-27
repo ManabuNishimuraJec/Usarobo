@@ -8,11 +8,14 @@ public class PlayerHpBar : MonoBehaviour
     private Slider slider;
     private int pHP;
 
+	private GameObject Player=null;
     private GameObject playerCanvas;
     
     void Start()
     {
-        pHP = transform.root.gameObject.GetComponent<PlayerControl>().HP;
+		Player = GameObject.FindGameObjectWithTag("Player");
+
+        pHP = Player.gameObject.GetComponent<PlayerControl>().HP;
 
         slider = GetComponent<Slider>();
         slider.value = pHP;
@@ -24,7 +27,7 @@ public class PlayerHpBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pHP = transform.root.gameObject.GetComponent<PlayerControl>().HP;
+        pHP = Player.gameObject.GetComponent<PlayerControl>().HP;
 
         slider.value = pHP;
 

@@ -54,7 +54,8 @@ public class PlayerControl : MonoBehaviour
         //  RigidbodyをGetComponemt
         MoveX = GetComponent<Rigidbody>();
         playerControl = GetComponent<CharacterController>();
-    }
+		Cursor.visible = false;
+	}
     void Update()
     {
         if (pMaster.CheckMode)
@@ -75,8 +76,13 @@ public class PlayerControl : MonoBehaviour
         {
             HP-=1;
         }
+		// エネミーバレットに当たったらHPを減少
+		if (other.gameObject.tag == "enemybullet")
+		{
+			HP -= 1;
+		}
 
-        if(other.gameObject.tag == "End")
+		if (other.gameObject.tag == "End")
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Clear");
         }
@@ -167,22 +173,22 @@ public class PlayerControl : MonoBehaviour
             InputY = -1;
         }
         // ↓画面端で停止する
-        if (transform.position.x > 5 && InputX == 1)
+        if (transform.position.x > 4.0f && InputX == 1)
         {
             InputX = 0;
         }
 
-        if (transform.position.x < -5 && InputX == -1)
+        if (transform.position.x < -4.0f && InputX == -1)
         {
             InputX = 0;
         }
 
-        if (transform.position.y > 3.6 && InputY == 1)
+        if (transform.position.y > 2.0 && InputY == 1)
         {
             InputY = 0;
         }
 
-        if (transform.position.y < -1.6 && InputY == -1)
+        if (transform.position.y < -2.0f && InputY == -1)
         {
             InputY = 0;
         }
@@ -190,9 +196,6 @@ public class PlayerControl : MonoBehaviour
 
         //  移動
         MoveX.velocity = new Vector3(speedX * InputX, speedY * InputY, 0.0f);
-
-		// Transform mytransform = this.transform;
-		// transform.Rotate(0.0f, 1.0f, 0.0f);
 
         time += Time.deltaTime;
         // 発射
@@ -207,12 +210,6 @@ public class PlayerControl : MonoBehaviour
 
             time = 0.0f;
         }
-
-        //if(!playerControl.isGrounded)
-        //{
-        //    MoveX.velocity = new Vector3(speedX * InputX, 0, 0);
-        //    Debug.Log("A");
-        //}
     }
 
     void  ShotAtk()

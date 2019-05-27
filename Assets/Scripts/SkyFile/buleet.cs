@@ -25,7 +25,6 @@ public class buleet : MonoBehaviour
     {
         // 時間を加算
 		time += Time.deltaTime;
-
 		if (taget != null)
 		{
 			transform.transform.position = Vector3.MoveTowards(transform.position, taget.transform.position, speed * 0.025f * Time.deltaTime);
