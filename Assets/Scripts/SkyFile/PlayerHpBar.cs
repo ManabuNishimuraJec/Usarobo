@@ -5,32 +5,27 @@ using UnityEngine.UI;
 
 public class PlayerHpBar : MonoBehaviour
 {
-    private Slider slider;
-    private int pHP;
+	private PlayerMaster pMaster=new PlayerMaster();
 
-	private GameObject Player=null;
+    private Slider slider;
+
     private GameObject playerCanvas;
     
     void Start()
     {
-		Player = GameObject.FindGameObjectWithTag("Player");
-
-        pHP = Player.gameObject.GetComponent<PlayerControl>().HP;
-
+	
         slider = GetComponent<Slider>();
-        slider.value = pHP;
-        slider.maxValue = pHP;
+		slider.maxValue = pMaster.MaxHp;
+		Debug.Log(slider.maxValue);
 
-        playerCanvas = transform.parent.gameObject;
+		playerCanvas = transform.parent.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        pHP = Player.gameObject.GetComponent<PlayerControl>().HP;
+		slider.value = pMaster.Hp;
 
-        slider.value = pHP;
-
-        playerCanvas.transform.LookAt(GameObject.Find("Main Camera").transform);
+		playerCanvas.transform.LookAt(GameObject.Find("Main Camera").transform);
     }
 }

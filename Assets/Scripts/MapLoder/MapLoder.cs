@@ -9,6 +9,7 @@ public class MapLoder : MonoBehaviour
     private PlayerMaster playerMaster = new PlayerMaster();
     private MapMaster mMaster = new MapMaster();
 
+
     void Start()
     {
         if(mapStyle=="Space")
@@ -19,10 +20,5 @@ public class MapLoder : MonoBehaviour
         {
             playerMaster.CheckMode = false;
         }
-    }
-
-    void Update()
-    {
-
     }
 }
