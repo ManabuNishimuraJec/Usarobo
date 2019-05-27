@@ -125,3 +125,4 @@ MonoBehaviour:
   maxtime: 2
   eposZ: 80
   ShotUnit: {fileID: 0}
+  atkPower: 1

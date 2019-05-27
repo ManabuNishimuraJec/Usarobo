@@ -5,6 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+
+    private PlayerMaster pMaster = new PlayerMaster();
+
+    [SerializeField]
+    private GameObject item;
+
+    [SerializeField]
+    private float hp = 0.0f;
+
 	// 歩くスピード
 	[SerializeField]
 	private float walkSpeed;
@@ -102,8 +111,24 @@ public class Enemy : MonoBehaviour
         }
 		velocity.y += Physics.gravity.y * Time.deltaTime;
 		enemyController.Move(velocity * Time.deltaTime);
+
+        //  HPが0以下になったらGameObjectを消す
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+            Instantiate(item,transform.position,Quaternion.identity);       //  アイテムドロップ
+        }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // バレットに当たったら耐久値を減らす
+        if (other.gameObject.tag == "bullet")
+        {
+            hp -= pMaster.BulletPower;
+        }
+    }
+   
 	public void SetState(string mode, Transform obj = null)
 	{
 		if (mode == "walk")

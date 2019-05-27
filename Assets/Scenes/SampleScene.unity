@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.40705517, g: 0.40608427, b: 0.57584643, a: 1}
+  m_IndirectSpecularColor: {r: 0.4070555, g: 0.40608412, b: 0.5758464, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -648,14 +648,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac6f68dc88d7274390d4dde91f848f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpPower: 0
   Bullet: {fileID: 8226198818624895118, guid: 3297b4bcc90768d4881d8fff3aa534b2, type: 3}
   center: {fileID: 1394176332}
-  speedX: 10
-  speedY: 10
-  speedZ: 2
-  HP: 5
+  atkPower: 0
+  jumpPower: 0
+  moveXYZ: {x: 20, y: 20, z: 20}
+  hp: 98
+  maxHp: 124
   maxtime: 0.06
 --- !u!65 &1070948895
 BoxCollider:
@@ -829,7 +828,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 0
+  m_MaxValue: 5
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:

@@ -15,16 +15,11 @@ public class canonControl : MonoBehaviour
 
     private ShotUnitMaster shotMaster = new ShotUnitMaster();
 
-    private Animator _anim;
-
     void Start()
     {
-        _anim = GetComponent<Animator>();
-
         pc.OnShotCanonmessage.Subscribe(_ =>
         {
-            _anim.Play("knockback",0,0.0f);   // Animation再生
-            // バレット生成
+			// バレット生成
             Instantiate(Bullet, transform.position + new Vector3(0.0f, 0.0f, 1.0f), Quaternion.identity);
         });
     }
@@ -34,8 +29,6 @@ public class canonControl : MonoBehaviour
         // マウスカーソルの座標を取得
         var pos = Vector3.forward * Vector3.Distance(transform.position, center.position);
         Vector3 dir = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition + pos));
-
-        Debug.Log(dir);
 
         // レイを飛ばす(発射点の座標、発射する向き)
         Ray ray = new Ray(transform.position, dir);

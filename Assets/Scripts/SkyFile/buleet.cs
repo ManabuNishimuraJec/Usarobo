@@ -21,6 +21,7 @@ public class buleet : MonoBehaviour
 
     private ShotUnitMaster shotMaster = new ShotUnitMaster();
 
+
     void Start()
     {
 		// Rigidbodyをgetconponent
@@ -43,7 +44,7 @@ public class buleet : MonoBehaviour
         // スピードを加算
 		rid.AddForce(transform.forward.normalized * speed * -1,ForceMode.Impulse);
         
-        if (myposZ > eposZ || time > maxtime)
+        if (time > maxtime)
 		{
 			Destroy(this.gameObject);
 		
