@@ -1,33 +1,70 @@
 ﻿using UnityEngine;
 
-public class skyenemy : MonoBehaviour
+public class SkyEnemy : MonoBehaviour
 {
     [SerializeField]
-    private Vector3 speed;
+    private float speed;
     [SerializeField]
-    private GameObject taget;
+    private SkyEnemyDirection direction;
+	[SerializeField]
+	private GameObject bullet;
+	[SerializeField]
+	private GameObject item;
 
     [SerializeField]
-    private float maxtime;
-    private float time;
+    private float movemaxtime;
+    private float movetime;
+	[SerializeField]
+	private float shotmaxtime;
+	private float shottime;
 
-    private Vector3 pos;
+	[SerializeField]
+	private int maxHP;
+	private int HP;
+
+	private Rigidbody rigidbody;
 
 
-    void Start()
+	void Start()
     {
-
+		movetime = 0.0f;
+		shottime = 0.0f;
+		HP = maxHP;
+		rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        time += Time.deltaTime;
+        movetime += Time.deltaTime;
+		shottime += Time.deltaTime;
+		//if (movetime > movemaxtime)
+		//{
+		//    transform.position = new Vector3(transform.position.x+direction.chengx, transform.position.y+direction.chengy, transform.position.z + speed);
+		//    movetime = 0.0f;
+		//}
+		rigidbody.velocity = new Vector3(speed * direction.chengx, speed * direction.chengy, speed*-1.0f);
+		if (shottime > shotmaxtime)
+		{
+			Instantiate(bullet, transform.position + new Vector3 ( 0.0f, 0.0f, -1.0f ), Quaternion.identity);
+			shottime = 0.0f;
+		}
 
-        pos = taget.transform.position;
-        if (time > maxtime)
-        {
-            transform.position += speed;
-            time = 0.0f;
-        }
-    }
+		if (HP <= 0)
+		{
+			Instantiate(item, transform.position, Quaternion.identity);
+			Destroy(gameObject);
+		}
+		if (transform.position.z <= -5.0f)
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	private void OnTriggerEnter(Collider col)
+	{
+		if (col.gameObject.tag == "bullet")
+		{
+			--HP;
+		}
+	}
 }

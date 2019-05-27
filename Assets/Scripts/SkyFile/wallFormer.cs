@@ -5,7 +5,9 @@ using UnityEngine;
 public class wallFormer : MonoBehaviour
 {
     // 障害物プレハブを格納
-    public GameObject Wall;
+	[SerializeField]
+    private GameObject Wall;
+	private Rigidbody rid;
 
     [SerializeField]
     private float time;     // 時間加算用
@@ -13,6 +15,8 @@ public class wallFormer : MonoBehaviour
 
     void Start()
     {
+		rid = GetComponent<Rigidbody>();
+
         // ０～３秒の整数を生成時間設定に代入
         timeMax = 1.0f;
     }
@@ -21,6 +25,9 @@ public class wallFormer : MonoBehaviour
     {
         // 時間を加算
         time += Time.deltaTime;
+
+		// 自身のZ座標を加算していく
+		rid.velocity = new Vector3(0.0f, 0.0f, 0.0f);
 
         if(time > timeMax)
         {

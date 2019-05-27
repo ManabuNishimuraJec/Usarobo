@@ -44,7 +44,7 @@ public class PlayerControl : MonoBehaviour
 
     private Subject<Unit> shotSubject = new Subject<Unit>();
 
-    public IObservable<Unit> OnShotCanonmessage
+    public IObservable<Unit> OnShotCanonMessage
     {
         get { return shotSubject; }
     }
@@ -110,8 +110,8 @@ public class PlayerControl : MonoBehaviour
         // 重力を設定
         velocity.y += Physics.gravity.y * Time.deltaTime;
 
-        playerControl.Move(velocity * Time.deltaTime);
 
+        playerControl.Move(velocity * Time.deltaTime);
         // 発射
         if (time > maxtime)
         {
@@ -130,17 +130,7 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log("R");
         int iNum = 10;
         int iNum2 = iNum;
-        // マウスカーソルの座標を取得
-        /* var pos = Vector3.forward * Vector3.Distance(transform.position, center.position);
-        Vector3 dir = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition + pos));
 
-        Debug.Log(dir);
-
-        // レイを飛ばす(発射点の座標、発射する向き)
-        Ray ray = new Ray(transform.position, dir);
-        // レイの向きをプレイヤーの向きと対応させる
-        transform.rotation = Quaternion.LookRotation(ray.direction);
-        */
         //  未入力時
         InputX = 0;
         InputY = 0;
@@ -199,7 +189,10 @@ public class PlayerControl : MonoBehaviour
         // ↑画面端で停止する
 
         //  移動
-        MoveX.velocity = new Vector3(speedX * InputX, speedY * InputY, 0);
+        MoveX.velocity = new Vector3(speedX * InputX, speedY * InputY, 0.0f);
+
+		// Transform mytransform = this.transform;
+		// transform.Rotate(0.0f, 1.0f, 0.0f);
 
         time += Time.deltaTime;
         // 発射
@@ -208,6 +201,7 @@ public class PlayerControl : MonoBehaviour
             // マウス左クリック
             if (Input.GetMouseButton(0))
             {
+				// 発射する信号を撃つ
                 shotSubject.OnNext(Unit.Default);
             }
 

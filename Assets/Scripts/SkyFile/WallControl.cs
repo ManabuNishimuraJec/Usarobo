@@ -70,25 +70,25 @@ public class WallControl : MonoBehaviour
         if (light)
         {
             // 質量、速度を代入,重さに対応した色に変更
-            rid.mass = 30;
+            rid.mass = 5000;
             gameObject.GetComponent<Renderer>().material.color = new Color(0f, 1f, 1f, 1f);
-            speed = -40;
+            speed = -20;
             HP = 4;
         }
         else if (middle)
         {
             // 質量、速度を代入,重さに対応した色に変更
-            rid.mass = 300;
+            rid.mass = 8000;
             gameObject.GetComponent<Renderer>().material.color = new Color(1f, 0.4f, 0f, 1f);
-            speed = -18;
+            speed = -9;
             HP = 13;
         }
         else if (heavy)
         {
             // 質量、速度を代入,重さに対応した色に変更
-            rid.mass = 500;
+            rid.mass = 10000;
             gameObject.GetComponent<Renderer>().material.color = new Color(0.5f, 0f, 1f, 1f);
-            speed = -5;
+            speed = -2.5f;
             HP = 16;
         }
     }
