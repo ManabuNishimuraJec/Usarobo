@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -285,6 +285,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &199964942 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5176647370878000858, guid: a5d5cc39687d4884b8149766dc3111b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 890512948}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac6f68dc88d7274390d4dde91f848f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &203718806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -701,16 +713,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5176647371449751834, guid: a5d5cc39687d4884b8149766dc3111b1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176647371074976234, guid: a5d5cc39687d4884b8149766dc3111b1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5176647370878000858, guid: a5d5cc39687d4884b8149766dc3111b1,
         type: 3}
       propertyPath: moveSpeed
@@ -719,17 +721,17 @@ PrefabInstance:
     - target: {fileID: 5176647370878000858, guid: a5d5cc39687d4884b8149766dc3111b1,
         type: 3}
       propertyPath: moveXYZ.x
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5176647370878000858, guid: a5d5cc39687d4884b8149766dc3111b1,
         type: 3}
       propertyPath: moveXYZ.y
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5176647370878000858, guid: a5d5cc39687d4884b8149766dc3111b1,
         type: 3}
       propertyPath: moveXYZ.z
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5176647370878000858, guid: a5d5cc39687d4884b8149766dc3111b1,
         type: 3}
@@ -745,6 +747,31 @@ PrefabInstance:
         type: 3}
       propertyPath: maxtime
       value: 13.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176647369875039245, guid: a5d5cc39687d4884b8149766dc3111b1,
+        type: 3}
+      propertyPath: m_Name
+      value: ShotUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176647369875039247, guid: a5d5cc39687d4884b8149766dc3111b1,
+        type: 3}
+      propertyPath: pControl
+      value: 
+      objectReference: {fileID: 199964942}
+    - target: {fileID: 5176647371561897020, guid: a5d5cc39687d4884b8149766dc3111b1,
+        type: 3}
+      propertyPath: pControl
+      value: 
+      objectReference: {fileID: 199964942}
+    - target: {fileID: 5176647371449751834, guid: a5d5cc39687d4884b8149766dc3111b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176647371074976234, guid: a5d5cc39687d4884b8149766dc3111b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5d5cc39687d4884b8149766dc3111b1, type: 3}
@@ -814,11 +841,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6440868345727782805, guid: 4d259b85f8a29ea4aaa856605f0c6433,
-        type: 3}
-      propertyPath: bossstage
-      value: 
-      objectReference: {fileID: 103787905}
     - target: {fileID: 1376598228272707280, guid: 4d259b85f8a29ea4aaa856605f0c6433,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -899,6 +921,11 @@ PrefabInstance:
       propertyPath: bossstatus
       value: 
       objectReference: {fileID: 848791786}
+    - target: {fileID: 6440868345727782805, guid: 4d259b85f8a29ea4aaa856605f0c6433,
+        type: 3}
+      propertyPath: bossstage
+      value: 
+      objectReference: {fileID: 103787905}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d259b85f8a29ea4aaa856605f0c6433, type: 3}
 --- !u!1 &1323552087

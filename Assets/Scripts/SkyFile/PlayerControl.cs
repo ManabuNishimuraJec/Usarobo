@@ -34,8 +34,7 @@ public class PlayerControl : MonoBehaviour
 	private float jumpPower = 0.0f;     //	ジャンプ力
 	[SerializeField]
 	private Vector3 moveXYZ;                //	移動速度
-	[SerializeField]
-	private int hp;                                 //	HP
+	public int hp;                                 //	HP
 	[SerializeField]
 	private int maxHp;                                 //	HP
 													   //--------------------------------------------------------
@@ -69,7 +68,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		//	各情報をMasterに保存
 		pMaster.MaxHp = maxHp;
-		pMaster.Hp = hp;
+		pMaster.Hp = maxHp;
 		pMaster.BulletPower = atkPower;
 		pMaster.MoveSpeed = moveXYZ;
 		pMaster.JumpPower = jumpPower;
@@ -98,7 +97,6 @@ public class PlayerControl : MonoBehaviour
 		{
 			ShootingControl();
 		}
-
 		else
 		{
 			ActionControl();
@@ -128,7 +126,11 @@ public class PlayerControl : MonoBehaviour
 		// 障害物に当たったらHPを減少
 		if (other.gameObject.tag == "wall")
 		{
-			hp -= 1;    //	HP減少
+			pMaster.Hp -= 1;    //	HP減少
+		}
+		if (other.gameObject.tag == "enemybullet")
+		{
+			pMaster.Hp -= 1;    //	HP減少
 		}
 
 		if (other.gameObject.tag == "End")
@@ -264,22 +266,22 @@ public class PlayerControl : MonoBehaviour
 		//Debug.Log("R");
 		int iNum = 10;
 		int iNum2 = iNum;
-
 		//  未入力時
 		InputX = 0;
 		InputY = 0;
 
 		// HPが0になったら自身を削除
-		if (pMaster.Hp <= 0)
+		if (hp <= 0)
 		{
-			Destroy(this.gameObject);
-			UnityEngine.SceneManagement.SceneManager.LoadScene("title");
+            Debug.Log("PlayerHP" + hp);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("title");
+            Destroy(this.gameObject);
 		}
 
 		//  Aが入力された場合
 		if (Input.GetKey(KeyCode.A))
 		{
-			//Debug.Log("A");
+			Debug.Log("A");
 			InputX = -1;
 		}
 
