@@ -14,9 +14,6 @@ public class Clone : MonoBehaviour
 	[SerializeField]
 	float maxtime;
 	float time;
-	private PlayerMaster pM = new PlayerMaster();
-	[SerializeField]
-	private Transform par;
     void Start()
     {
 		time = 0.0f;
@@ -28,7 +25,7 @@ public class Clone : MonoBehaviour
 		//指定時間を超えたら出す
 		if (time > maxtime)
 		{
-			Instantiate(a,transform.position,Quaternion.identity,par);
+			Instantiate(a,transform.position,Quaternion.identity);
 			time = 0.0f;
 			--cloneVolum;
 		}

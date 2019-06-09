@@ -15,7 +15,6 @@ public class PlayerHpBar : MonoBehaviour
     {
         slider = GetComponent<Slider>();
 		slider.maxValue = pMaster.MaxHp;
-		Debug.Log(slider.maxValue);
 
 		playerCanvas = transform.parent.gameObject;
     }
