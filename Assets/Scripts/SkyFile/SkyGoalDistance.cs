@@ -41,11 +41,5 @@ public class SkyGoalDistance : MonoBehaviour
 		goaldistance =(int) (((Maxdistance - Nowdistance) / Maxdistance) * 1000.0f);
 		//スライダーに反映
 		slider.value = goaldistance;
-		Debug.Log("1");
-		Debug.Log(mapmaster.EndLine);
-		Debug.Log("2");
-		Debug.Log(goaldistance);
-		Debug.Log("3");
-		Debug.Log(goal.transform.position);
 	}
 }

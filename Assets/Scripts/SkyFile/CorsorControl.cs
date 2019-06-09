@@ -28,11 +28,6 @@ public class CorsorControl : MonoBehaviour
 				transform.position = wallPos + new Vector3(0.0f, 0.0f, -5.0f);
 			});
 		}
-		//cControl.OnWallPosMessage.Subscribe(wallPos => // 信号キャッチ
-		//{
-		//	// 信号に乗ってわたってきたwallの座標を自身の座標に代入
-		//	transform.position = wallPos + new Vector3(0.0f,0.0f,-2.0f);
-		//});
 	}
 
 	void Update()

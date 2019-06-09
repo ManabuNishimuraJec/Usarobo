@@ -7,10 +7,10 @@ using System;
 public class CameraTriigerSignal : MonoBehaviour
 {
 	// 信号を送る準備
-	private Subject<Unit> triggerSubject = new Subject<Unit>();
+	private Subject<ChasePointControl> triggerSubject = new Subject<ChasePointControl>();
 
 	// 信号を送る処理
-	public IObservable<Unit> onTriggerMessage
+	public IObservable<ChasePointControl> onTriggerMessage
 	{
 		get { return triggerSubject; }
 	}
@@ -19,9 +19,8 @@ public class CameraTriigerSignal : MonoBehaviour
 	{
 		if(other.tag == "ChasePoint")
 		{
-			Debug.Log("当たった");
 			// 親に信号を送る
-			triggerSubject.OnNext(Unit.Default);
+			triggerSubject.OnNext(other.GetComponent<ChasePointControl>());
 		}
 	}
 }

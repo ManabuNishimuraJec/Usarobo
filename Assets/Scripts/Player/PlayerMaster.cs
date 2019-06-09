@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMaster : MonoBehaviour
 {
     private static Vector3 playerPosition;
+	private static Vector3 screenPosition;
     private static bool checkMode;
     private static float bulletPower;
 	private static int hp;
@@ -12,6 +13,7 @@ public class PlayerMaster : MonoBehaviour
 	private static float jumpPower;
 	private static Vector3 moveSpeed;
 
+	public Vector3 ScreenPosition { get => screenPosition; set => screenPosition = value; }
 	public  Vector3 MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 	public int Hp { get => hp; set => hp = value; }
 	public int MaxHp { get => maxHp; set => maxHp = value; }
