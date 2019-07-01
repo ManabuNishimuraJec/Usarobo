@@ -1,7 +1,4 @@
-﻿//修正すべき課題
-//めんだこの進行方向の設定　*完了
-//めんだこの動き方
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MendakoZako : MonoBehaviour
 {
@@ -11,29 +8,31 @@ public class MendakoZako : MonoBehaviour
 	[SerializeField]
 	private float stopSpeed;
 	private PlayerMaster pM = new PlayerMaster();
-	[SerializeField]
-	private Vector3 Dec;
 	private bool isMove;
 	[SerializeField]
 	private float maxTime;
 	private float time;
 	private bool a;
-	private Quaternion d;
+	[SerializeField]
+	private float destroyPos;
+	[SerializeField]
+	private float rotedis;
+	[SerializeField]
+	private float disAbs;
+	[SerializeField]
+	private float destroyTime;
 	void Start()
-    {
+	{
 		rig = GetComponent<Rigidbody>();
 		isMove = true;
 		a = true;
 		time = 0.0f;
 		var aim = (pM.PlayerPosition - transform.position)*-1.0f;
 		transform.localRotation = Quaternion.LookRotation(aim, transform.up);
-		d = new Quaternion(70.0f, 70.0f, 70.0f,0.0f);
-    }
-
+	}
 	void Update()
 	{
-		//float angle = transform.eulerAngles.z * (Mathf.PI);
-		//Vector3 nowVector = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0.0f);
+		destroyTime += Time.deltaTime;
 		if (isMove)
 		{
 			if (a)
@@ -53,17 +52,18 @@ public class MendakoZako : MonoBehaviour
 				a = true;
 				time = 0.0f;
 				var aim = (pM.PlayerPosition - transform.position)*-1.0f;
-				d= Quaternion.LookRotation(aim);
-				if ((d.x > -60.0f && d.x < 60.0f) && (d.y > -60.0f && d.y < 60.0f))
+				disAbs = Vector3.Distance(transform.TransformPoint(transform.position), pM.PlayerPosition);
+				//一定距離まで向きを変える
+				if (disAbs>rotedis)
 				{
-					transform.localRotation = Quaternion.LookRotation(aim);
+					Debug.Log(disAbs);
+					transform.rotation = Quaternion.LookRotation(aim);
 				}
 			}
 			time += Time.deltaTime;
-
-			
 		}
-		if (transform.position.z <pM.PlayerPosition.z-1.0f) Destroy(gameObject);
+		if (transform.position.z < pM.PlayerPosition.z - destroyPos) Destroy(gameObject);
+		if (destroyTime > 9.0f) Destroy(gameObject);
 	}
 	private void OnTriggerEnter(Collider col)
 	{

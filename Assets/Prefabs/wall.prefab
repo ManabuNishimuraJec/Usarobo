@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab1eb3deb8d7334bb5bcb9a15251b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pPos: {fileID: 6000150120428677525, guid: 20fbbe6de3cf12a4b8b1df2511141593, type: 3}
   light: 0
   middle: 0
   heavy: 0
+  timeMax: 10

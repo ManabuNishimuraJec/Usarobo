@@ -13,7 +13,9 @@ public class SkyEnemy : MonoBehaviour
 
 	[SerializeField]
 	private float shotmaxtime;				//弾を撃つ間隔
-	private float shottime;					//クールタイム用
+	private float shottime;                 //クールタイム用
+
+	private PlayerMaster pM = new PlayerMaster();
 
 	[SerializeField]
 	private int maxHP;						//エネミー最大HP
@@ -32,13 +34,15 @@ public class SkyEnemy : MonoBehaviour
     void Update()
     {
 		shottime += Time.deltaTime;
+		var aim = (pM.PlayerPosition - transform.position) * -1.0f;
+		transform.rotation = Quaternion.LookRotation(aim);
 		//エネミーの動き
 		rigidbody.velocity = new Vector3(speed * direction.chengx, speed * direction.chengy, speed*-0.2f);
 		//弾発射条件
 		if (shottime > shotmaxtime)
 		{
 			//弾生成
-			Instantiate(bullet, transform.position + new Vector3 ( 0.0f, 0.0f, -1.0f ), Quaternion.identity);
+			Instantiate(bullet, transform.position + new Vector3 ( 0.0f, 0.0f, -1.0f ), transform.rotation);
 			shottime = 0.0f;
 		}
 		//死亡判定

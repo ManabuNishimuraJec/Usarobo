@@ -60,9 +60,7 @@ public class ChaseCamera : MonoBehaviour
 
 				// ポイントナンバーを更新
 				pointNum++;
-
-				transform.rotation = rot.CameraVector;
-
+				
 				// 計算呼び出し
 				heading = ChaseVectorCalculator(prevTarPos, nextTarPos);
 			}
@@ -74,8 +72,8 @@ public class ChaseCamera : MonoBehaviour
 			}
 		});
 	}
-	
-    void Update()
+
+	void LateUpdate()
 	{
 	    PointChase(heading);               // 実際に追う処理呼び出し
 	}
@@ -88,8 +86,7 @@ public class ChaseCamera : MonoBehaviour
 		// 計算した方向を返す
 		return heading;
 	}
-
-	// 現在位置とプレイヤーとの角度差を計算する
+	
 	public Vector3 TargetVectorCaluculator(Vector3 myPos,Vector3 targetPos)
 	{
 		var targetVector = (targetPos - myPos);
@@ -102,7 +99,6 @@ public class ChaseCamera : MonoBehaviour
 		// 方向に向かって進む処理
 		//割り出した方向に向く
 		transform.rotation = Quaternion.LookRotation(TargetVectorCaluculator(transform.position,target.transform.position));
-        //Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(heading), 45 * Time.deltaTime);
 
         // ラストに達していなければ実際にポイントを追う（移動する）
         if (lastChasePointFlag)
