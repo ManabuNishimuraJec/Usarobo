@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: 5c3fa4872d6f79147809388b8ad5bc6d
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: body
+    100002: left_ashi
+    100004: left_kannsetsu1
+    100006: left_kannsetsu2
+    100008: left_kannsetsu3
+    100010: left_kannsetsu4
+    100012: left_momo
+    100014: left_sune
+    100016: left_yubi
+    100018: right_ashi
+    100020: right_kannsetsu1
+    100022: right_kannsetsu2
+    100024: right_kannsetsu3
+    100026: right_kannsetsu4
+    100028: right_momo
+    100030: right_sune
+    100032: right_yubi
+    100034: //RootNode
+    100036: robo
+    100038: tsume_hidari
+    100040: tsume_hidari1
+    100042: tsume_mannmaka
+    100044: tsume_mannmaka1
+    100046: tsume_migi
+    100048: tsume_migi1
+    100050: usa
+    400000: body
+    400002: left_ashi
+    400004: left_kannsetsu1
+    400006: left_kannsetsu2
+    400008: left_kannsetsu3
+    400010: left_kannsetsu4
+    400012: left_momo
+    400014: left_sune
+    400016: left_yubi
+    400018: right_ashi
+    400020: right_kannsetsu1
+    400022: right_kannsetsu2
+    400024: right_kannsetsu3
+    400026: right_kannsetsu4
+    400028: right_momo
+    400030: right_sune
+    400032: right_yubi
+    400034: //RootNode
+    400036: robo
+    400038: tsume_hidari
+    400040: tsume_hidari1
+    400042: tsume_mannmaka
+    400044: tsume_mannmaka1
+    400046: tsume_migi
+    400048: tsume_migi1
+    400050: usa
+    2100000: lambert1
+    2300000: body
+    2300002: left_ashi
+    2300004: left_kannsetsu1
+    2300006: left_kannsetsu2
+    2300008: left_kannsetsu3
+    2300010: left_kannsetsu4
+    2300012: left_momo
+    2300014: left_sune
+    2300016: left_yubi
+    2300018: right_ashi
+    2300020: right_kannsetsu1
+    2300022: right_kannsetsu2
+    2300024: right_kannsetsu3
+    2300026: right_kannsetsu4
+    2300028: right_momo
+    2300030: right_sune
+    2300032: right_yubi
+    2300034: tsume_hidari
+    2300036: tsume_hidari1
+    2300038: tsume_mannmaka
+    2300040: tsume_mannmaka1
+    2300042: tsume_migi
+    2300044: tsume_migi1
+    3300000: body
+    3300002: left_ashi
+    3300004: left_kannsetsu1
+    3300006: left_kannsetsu2
+    3300008: left_kannsetsu3
+    3300010: left_kannsetsu4
+    3300012: left_momo
+    3300014: left_sune
+    3300016: left_yubi
+    3300018: right_ashi
+    3300020: right_kannsetsu1
+    3300022: right_kannsetsu2
+    3300024: right_kannsetsu3
+    3300026: right_kannsetsu4
+    3300028: right_momo
+    3300030: right_sune
+    3300032: right_yubi
+    3300034: tsume_hidari
+    3300036: tsume_hidari1
+    3300038: tsume_mannmaka
+    3300040: tsume_mannmaka1
+    3300042: tsume_migi
+    3300044: tsume_migi1
+    4300000: body
+    4300002: left_kannsetsu1
+    4300004: left_kannsetsu2
+    4300006: left_sune
+    4300008: left_kannsetsu3
+    4300010: left_ashi
+    4300012: left_kannsetsu4
+    4300014: left_yubi
+    4300016: tsume_mannmaka
+    4300018: tsume_migi
+    4300020: right_kannsetsu1
+    4300022: right_kannsetsu2
+    4300024: tsume_hidari
+    4300026: right_sune
+    4300028: right_kannsetsu3
+    4300030: right_ashi
+    4300032: right_kannsetsu4
+    4300034: right_yubi
+    4300036: tsume_mannmaka1
+    4300038: tsume_migi1
+    4300040: tsume_hidari1
+    4300042: left_momo
+    4300044: right_momo
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

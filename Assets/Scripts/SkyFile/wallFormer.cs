@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class wallFormer : MonoBehaviour
 {
-    // 障害物プレハブを格納
-    public GameObject Wall;
+	// 障害物のリスト
+	[SerializeField]
+	private List<GameObject> wallList = new List<GameObject>();   // wall用のリスト
 
-    [SerializeField]
-    private float time;     // 時間加算用
-    private float timeMax;  // 生成時間設定用
+	private int rand;
+
+	private float time;     // 時間加算用
+	[SerializeField]
+	private float timeMax;  // 生成時間設定用
 
     void Start()
     {
@@ -24,14 +27,30 @@ public class wallFormer : MonoBehaviour
 
         if(time > timeMax)
         {
-            // 障害物生成
-            Instantiate(Wall, transform.position, Quaternion.identity);
+			rand = Random.Range(0, 4);
 
+			switch (rand)
+			{
+				// 障害物生成
+				case 0:
+					Instantiate(wallList[0], transform.position, Quaternion.identity);
+					break;
+				case 1:
+					Instantiate(wallList[1], transform.position, Quaternion.identity);
+					break;
+				case 2:
+					Instantiate(wallList[2], transform.position, Quaternion.identity);
+					break;
+				case 3:
+					Instantiate(wallList[3], transform.position, Quaternion.identity);
+					break;
+			}
+			
             // タイムリセット
             time = 0.0f;
 
             // 生成時間変更
-            timeMax =　timeMax = Random.Range(0.5f, 1.5f);
+            timeMax =　timeMax = Random.Range(1.5f, 3.0f);
         }
     }
 }

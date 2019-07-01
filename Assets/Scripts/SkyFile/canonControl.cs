@@ -45,7 +45,7 @@ public class canonControl : MonoBehaviour
 		{
 			_anim.Play("knockback", 0, 0.0f);   // Animation再生
 												// バレット生成
-			shotbullet = Instantiate(Bullet, transform.position + new Vector3(0.0f, 0.0f, 1.0f), transform.rotation);
+			shotbullet = Instantiate(Bullet, transform.position + transform.forward * 1.0f, transform.rotation);
 			bullet = shotbullet.GetComponent<buleet>();
 			if (taget != null)
 			{
