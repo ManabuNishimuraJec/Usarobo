@@ -229,10 +229,7 @@ public class PlayerControl : MonoBehaviour
 	}
 	
 	void Clamp()
-	{
-		// 向きをカメラに背を向け続けるように補正
-		transform.rotation = new Quaternion(transform.localRotation.x, Camera.main.transform.rotation.y, Camera.main.transform.rotation.z, Camera.main.transform.rotation.w).normalized;
-
+	{d
 		// プレイヤーの座標を取得
 		Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 		Vector3 newPos = PosCheck(pos, new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 0.0f));
